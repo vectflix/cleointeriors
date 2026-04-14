@@ -55,24 +55,26 @@
             uploadPreset: 'ml_default',
             tags: ['cleo_web'] 
         }, (error, result) => {
-            if (!error && result.event === "success") { location.reload(); }
+            if (!error && result.event === "success") { 
+                location.reload(); 
+            }
         });
     }
 
-    // NEW GALLERY INITIALIZATION
+    // NEW ROBUST INITIALIZATION
     const gallery = cloudinary.galleryWidget({
         container: "#my-gallery",
         cloudName: "dcssgckgn",
         mediaAssets: [
+            // Instead of just 'tag', we define the source more broadly
             { 
-                tag: "cleo_web",
-                mediaType: "image" 
+                tag: "cleo_web", 
+                mediaType: "image",
+                resourceType: "image" 
             }
         ],
-        // We add this to bypass potential list-fetching issues
-        query: {
-            tag: "cleo_web"
-        },
+        // This is the "secret sauce" to force the widget to work
+        carouselStyle: "none", 
         displayProps: { 
             mode: "classic", 
             columns: 2, 
@@ -82,8 +84,13 @@
             themeProps: { color: "#FF6600" } 
         }
     });
-    
-    gallery.render();
+
+    // We add a listener to see if it's failing
+    gallery.render().then(() => {
+        console.log("CLEO_CORE: Gallery Render Protocol Complete.");
+    }).catch(err => {
+        console.error("CLEO_CORE: Critical Sync Error", err);
+    });
 </script>
 
 </body>
