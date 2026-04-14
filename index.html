@@ -3,67 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CLEO INTERIORS | Cyber-Design</title>
+    <title>CLEO INTERIORS | The Future of Living</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
 </head>
 <body>
 
 <header>
-    <h1>⚒️ CLEO <span style="color: var(--neon-orange);">CORE</span></h1>
+    <h1>⚒️ CLEO<span style="color:var(--orange)">_CORE</span></h1>
     <nav>
-        <a href="#home">HOME</a>
-        <a href="#portfolio">PORTFOLIO</a>
-        <a href="https://wa.me/254724674835">CONTACT</a>
+        <a href="index.html">HOME</a>
+        <a href="content.html">PORTFOLIO</a>
+        <a href="about.html">SYSTEM_INFO</a>
     </nav>
 </header>
 
-<section class="hero" id="home">
-    <h1>ENGINEERED LUXURY</h1>
-    <p>Interior design for the next generation.</p>
-    <button class="btn-main" onclick="openUploadWidget()">UPLOAD NEW PROJECT</button>
+<section class="hero">
+    <h1 style="animation: float 5s infinite;">NEO-INTERIORS</h1>
+    <p style="letter-spacing: 5px;">ARCHITECTURE // DESIGN // PRECISION</p>
+    <br>
+    <a href="content.html"><button class="btn-cyber">INITIALIZE EXPLORATION</button></a>
 </section>
 
-<section id="portfolio">
-    <h2 style="text-align: center; letter-spacing: 5px; color: var(--neon-orange);">LATEST BUILDS</h2>
-    <div class="gallery-grid" id="gallery">
+<section class="section">
+    <div class="grid">
+        <div class="glass-card">
+            <h2>01. BIOMETRIC FLOW</h2>
+            <p>We design spaces that respond to human movement. Our layouts aren't just rooms; they are living systems engineered for peak psychological comfort and ergonomic flow.</p>
         </div>
+        <div class="glass-card">
+            <h2>02. INDUSTRIAL ARMOR</h2>
+            <p>Using aircraft-grade materials and reinforced industrial timber, CLEO interiors are built to survive centuries. We define durability as the ultimate luxury.</p>
+        </div>
+        <div class="glass-card">
+            <h2>03. LIGHT SYNC</h2>
+            <p>Our futuristic lighting systems sync with your circadian rhythm, shifting from energizing neons during the day to warm, protective ambers at night.</p>
+        </div>
+    </div>
 </section>
 
 <footer>
-    <div style="text-align: center; padding: 50px; border-top: 1px solid #222;">
-        <p>CLEO INTERIORS © 2026 | SYSTEM ACTIVE</p>
-    </div>
+    <p>CLEO INTERIORS // ACCESS GRANTED // 2026</p>
 </footer>
-
-<script>
-    const cloudName = 'dcssgckgn';
-    const unsignedUploadPreset = 'ml_default';
-
-    // 1. OPEN UPLOAD WIDGET
-    function openUploadWidget() {
-        cloudinary.openUploadWidget({
-            cloudName: cloudName,
-            uploadPreset: unsignedUploadPreset,
-            sources: ['local', 'url', 'camera'],
-            showAdvancedOptions: false,
-            cropping: true,
-            multiple: false,
-            defaultSource: 'local'
-        }, (error, result) => {
-            if (!error && result && result.event === "success") {
-                console.log('Upload success! Refreshing Gallery...');
-                location.reload(); // Refresh to show new photo
-            }
-        });
-    }
-
-    // 2. FETCH AND SHOW PHOTOS AUTOMATICALLY
-    // Note: To list images, Cloudinary requires a "Resource List" or "Tag"
-    // For a simple version, we will manually link your images or use an API.
-    // Pro Tip: Give your uploads a tag like 'cleo_web' in the preset settings!
-</script>
 
 </body>
 </html>
