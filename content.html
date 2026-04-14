@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | CLEO CORE</title>
+    <title>PORTFOLIO | CLEO CORE</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://product-gallery.cloudinary.com/all.js" type="text/javascript"></script>
+    <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
 </head>
 <body>
 
@@ -15,36 +16,38 @@
 </header>
 
 <section class="section">
-    <h2 style="color:var(--orange)">SYSTEM_PORTFOLIO</h2>
-    <p>All projects are uploaded and synced via CLEO_CLOUD.</p>
-    
-    <button class="btn-cyber" id="upload-widget" style="margin-bottom: 50px;">+ ADD NEW PROJECT</button>
+    <h2 style="color:var(--orange); text-align:center;">VAULT_GALLERY</h2>
+    <div style="text-align:center; margin-bottom:40px;">
+        <button onclick="openWidget()" style="background:var(--orange); border:none; padding:15px 30px; color:white; font-family:'Orbitron'; cursor:pointer;">UPLOAD NEW PROJECT</button>
+    </div>
 
-    <div id="my-gallery" style="max-width:1200px; margin:auto;"></div>
+    <div id="my-gallery" style="width:100%; max-width:1000px; margin:auto;"></div>
 </section>
 
-<script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
 <script>
-    // 1. UPLOAD LOGIC
-    var myWidget = cloudinary.createUploadWidget({
-        cloudName: 'dcssgckgn', 
-        uploadPreset: 'ml_default',
-        tags: ['cleo_work'] // Photos get this tag automatically
-    }, (error, result) => { 
-        if (!error && result && result.event === "success") { location.reload(); }
-    });
-    document.getElementById("upload-widget").addEventListener("click", function(){ myWidget.open(); }, false);
+    // FIX: This function MUST include the TAG
+    function openWidget() {
+        cloudinary.openUploadWidget({
+            cloudName: 'dcssgckgn',
+            uploadPreset: 'ml_default',
+            tags: ['cleo_web'] // <--- THIS TAG IS KEY
+        }, (error, result) => {
+            if (!error && result.event === "success") { 
+                alert("Upload Successful! Refreshing gallery...");
+                location.reload(); 
+            }
+        });
+    }
 
-    // 2. DISPLAY LOGIC (Pulls all photos with tag 'cleo_work')
-    const myGallery = cloudinary.galleryWidget({
+    // GALLERY LOGIC
+    const gallery = cloudinary.galleryWidget({
         container: "#my-gallery",
         cloudName: "dcssgckgn",
-        mediaAssets: [{ tag: "cleo_work" }], // This pulls your uploaded photos!
-        displayProps: { mode: "classic", columns: 2, spacing: 15 },
-        aspectRatio: "16:9",
+        mediaAssets: [{ tag: "cleo_web" }], // <--- Pulls images with this tag
+        displayProps: { mode: "classic", columns: 2 },
         styleProps: { themeProps: { color: "#FF6600" } }
     });
-    myGallery.render();
+    gallery.render();
 </script>
 
 </body>
