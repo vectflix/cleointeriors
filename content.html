@@ -3,27 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | CLEO CORE</title>
+    <title>Portfolio | CLEO CORE ARCHIVE</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
     <script src="https://product-gallery.cloudinary.com/all.js" type="text/javascript"></script>
     <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
 </head>
 <body>
 
 <header>
-    <h1>⚒️ CLEO</h1>
-    <nav><a href="index.html">HOME</a><a href="content.html">PORTFOLIO</a><a href="about.html">ABOUT</a></nav>
+    <h1>⚒️ CLEO<span style="color:var(--orange)">_CORE</span></h1>
+    <nav>
+        <a href="index.html">HOME</a>
+        <a href="content.html">PORTFOLIO</a>
+        <a href="about.html">ABOUT</a>
+    </nav>
 </header>
 
 <section class="section container">
-    <h2 style="color:var(--orange); text-align:center; font-size: 2.5rem;">VAULT_ARCHIVE</h2>
-    <p style="text-align:center; color: var(--dim-text); margin-bottom: 40px;">Visual documentation of previous successful deployments.</p>
+    <div style="border-bottom: 1px solid #222; margin-bottom: 50px; padding-bottom: 20px;">
+        <h1 style="color:var(--orange); font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 10px;">VAULT_ARCHIVE</h1>
+        <p style="color: var(--dim-text); max-width: 800px; font-size: 1.1rem; line-height: 1.6;">
+            Welcome to the CLEO_CORE centralized visual database. This archive serves as a permanent record of our 
+            <strong>Tier-1 Industrial Deployments</strong>. Every project captured here represents a successful 
+            integration of heavy-duty engineering and futuristic spatial dynamics. 
+        </p>
+    </div>
     
-    <div style="text-align:center; margin-bottom:60px;">
-        <button onclick="openWidget()" style="background:none; border:2px solid var(--orange); padding:15px 40px; color:var(--orange); font-family:'Orbitron'; cursor:pointer; font-weight:bold;">UPLOAD_DATA_STREAM</button>
+    <div style="background: #0a0a0a; border: 1px solid #1a1a1a; padding: 30px; margin-bottom: 60px; text-align: center;">
+        <h3 style="color: var(--orange); margin-top: 0; font-family: 'Orbitron'; font-size: 0.8rem; letter-spacing: 3px;">ADMIN_UPLOADER</h3>
+        <p style="font-size: 0.9rem; color: #666; margin-bottom: 20px;">Initialize data stream to sync new captures to the public vault.</p>
+        <button onclick="openWidget()" style="background:none; border:2px solid var(--orange); padding:12px 35px; color:var(--orange); font-family:'Orbitron'; cursor:pointer; font-weight:bold; font-size: 0.75rem;">UPLOAD_DATA_STREAM</button>
     </div>
 
-    <div id="my-gallery" style="width:100%; min-height: 500px;"></div>
+    <div id="my-gallery" style="width:100%; min-height: 600px; border: 1px solid #111; padding: 10px;"></div>
+
+    <div style="margin-top: 80px; padding-top: 40px; border-top: 1px solid #222;">
+        <h3 style="color: var(--orange);">ARCHIVE_NOTES</h3>
+        <p style="color: var(--dim-text); font-size: 0.95rem;">
+            Projects displayed above include residential re-engineering, commercial "Chrome-Core" labs, and private 
+            obsidian-tier sanctuaries. Each image represents a finished protocol where vision met precision. 
+            All hardware shown is custom-fabricated by CLEO INTERIORS Nairobi Hub.
+        </p>
+    </div>
 </section>
 
 <script>
@@ -33,16 +55,34 @@
             uploadPreset: 'ml_default',
             tags: ['cleo_web'] 
         }, (error, result) => {
-            if (!error && result.event === "success") { location.reload(); }
+            if (!error && result.event === "success") { 
+                console.log("Stream Complete. Re-syncing...");
+                location.reload(); 
+            }
         });
     }
 
+    // GALLERY LOGIC WITH CACHE BUSTER
     const gallery = cloudinary.galleryWidget({
         container: "#my-gallery",
         cloudName: "dcssgckgn",
-        mediaAssets: [{ tag: "cleo_web" }],
-        displayProps: { mode: "classic", columns: 2, spacing: 10 },
-        styleProps: { themeProps: { color: "#FF6600" } }
+        mediaAssets: [{ 
+            tag: "cleo_web",
+            // This prevents the browser from showing an old version of the list
+            version: Math.floor(Date.now() / 1000) 
+        }],
+        displayProps: { 
+            mode: "classic", 
+            columns: 2, 
+            spacing: 15,
+            aspectRatio: "16:9" 
+        },
+        styleProps: { 
+            themeProps: { 
+                color: "#FF6600",
+                background: "transparent"
+            } 
+        }
     });
     gallery.render();
 </script>
