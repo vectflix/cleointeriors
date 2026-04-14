@@ -55,35 +55,34 @@
             uploadPreset: 'ml_default',
             tags: ['cleo_web'] 
         }, (error, result) => {
-            if (!error && result.event === "success") { 
-                console.log("Stream Complete. Re-syncing...");
-                location.reload(); 
-            }
+            if (!error && result.event === "success") { location.reload(); }
         });
     }
 
-    // GALLERY LOGIC WITH CACHE BUSTER
+    // NEW GALLERY INITIALIZATION
     const gallery = cloudinary.galleryWidget({
         container: "#my-gallery",
         cloudName: "dcssgckgn",
-        mediaAssets: [{ 
-            tag: "cleo_web",
-            // This prevents the browser from showing an old version of the list
-            version: Math.floor(Date.now() / 1000) 
-        }],
+        mediaAssets: [
+            { 
+                tag: "cleo_web",
+                mediaType: "image" 
+            }
+        ],
+        // We add this to bypass potential list-fetching issues
+        query: {
+            tag: "cleo_web"
+        },
         displayProps: { 
             mode: "classic", 
             columns: 2, 
-            spacing: 15,
-            aspectRatio: "16:9" 
+            spacing: 15 
         },
         styleProps: { 
-            themeProps: { 
-                color: "#FF6600",
-                background: "transparent"
-            } 
+            themeProps: { color: "#FF6600" } 
         }
     });
+    
     gallery.render();
 </script>
 
