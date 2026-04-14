@@ -6,102 +6,120 @@
     --white: #ffffff;
 }
 
-/* --- Smooth Animations --- */
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes slideInLeft {
-    from { opacity: 0; transform: translateX(-50px); }
-    to { opacity: 1; transform: translateX(0); }
-}
-
+/* --- Global & Typography --- */
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     background-color: var(--light-bg);
-    overflow-x: hidden;
+    color: var(--dark-grey);
+    scroll-behavior: smooth;
+    overflow-x: hidden; /* Prevents side-scrolling on mobile */
 }
 
-/* --- Header & Nav --- */
+/* --- Responsive Navigation --- */
 header {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 15px 5%;
+    background: white;
+    padding: 1rem 5%;
     display: flex;
+    flex-wrap: wrap; /* Allows nav to wrap on small screens */
     justify-content: space-between;
     align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     position: sticky;
-    top: 0;
+    top: 0; 
     z-index: 1000;
-    border-bottom: 3px solid var(--forest-green);
+}
+
+nav {
+    display: flex;
+    gap: 15px;
 }
 
 nav a {
-    margin-left: 25px;
     text-decoration: none;
     color: var(--dark-grey);
     font-weight: 600;
+    font-size: 0.9rem;
     transition: 0.3s;
 }
 
-nav a:hover { color: var(--primary-orange); }
-
-/* --- Hero Section --- */
+/* --- Hero Section (Adjusts height for mobile) --- */
 .hero {
-    height: 80vh;
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                url('https://images.unsplash.com/photo-1616489953149-805175402636?q=80&w=2000');
+    min-height: 60vh;
+    padding: 40px 20px;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=1200');
     background-size: cover;
+    background-position: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     color: white;
-    animation: fadeInUp 1s ease-out;
-}
-
-.hero h1 { font-size: 4rem; margin: 0; }
-
-/* --- Drag & Drop Section --- */
-.upload-container {
-    padding: 60px 10%;
     text-align: center;
-    animation: fadeInUp 1.2s ease-out;
 }
 
+.hero h1 { font-size: 2.5rem; }
+
+/* --- Flexible Grid --- */
+.section { padding: 60px 5%; }
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Magic line for responsiveness */
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    border-bottom: 4px solid var(--forest-green);
+}
+
+/* --- Mobile Upload Widget --- */
 #upload-widget {
-    background: var(--white);
+    width: 100%;
+    box-sizing: border-box;
     border: 3px dashed var(--forest-green);
-    padding: 50px;
+    padding: 40px 10px;
     border-radius: 20px;
-    cursor: pointer;
-    transition: 0.3s;
-    display: inline-block;
-    width: 80%;
 }
 
-#upload-widget:hover {
-    border-color: var(--primary-orange);
-    background: #fff5ee;
-    transform: scale(1.02);
+/* --- MEDIA QUERIES (The Secret Sauce) --- */
+
+/* For Tablets and Phones */
+@media (max-width: 768px) {
+    header {
+        justify-content: center;
+        text-align: center;
+    }
+    
+    nav {
+        margin-top: 15px;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .section {
+        padding: 40px 20px;
+    }
 }
 
-/* --- WhatsApp Button --- */
-.wa-float {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background: #25D366;
-    color: white;
-    padding: 15px 25px;
-    border-radius: 50px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    text-decoration: none;
-    font-weight: bold;
-    z-index: 1000;
-    transition: 0.3s;
+/* For Very Small Phones */
+@media (max-width: 480px) {
+    nav a {
+        font-size: 0.8rem;
+        margin-left: 10px;
+    }
+    
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
 }
-
-.wa-float:hover { transform: scale(1.1); background: #128C7E; }
